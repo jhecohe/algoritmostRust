@@ -5,10 +5,14 @@ pub fn two_sum(arr: &[i32], num: i32) -> [i32; 2] {
     for index in 0..arr.len() {
         println!("{}", arr[index]);
         let complement = num - arr[index];
-        if mapa.contains_key(&complement) {
-            return [mapa.remove(&complement).is_some(), index as i32];
+        match mapa.get(&complement) {
+            Some(num) => {
+                return [*num, index as i32];
+            }
+            None => {
+                mapa.insert(arr[index], index as i32);
+            }
         }
-        mapa.insert(arr[index], index);
     }
     [0, 0]
 }
@@ -20,3 +24,19 @@ fn two_sum_test() {
     assert!((result[0] == 1 && result[1] == 2) || (result[0] == 2 && result[1] == 1));
     assert_eq!([0, 0], two_sum(&arr, 50));
 }
+
+/*
+ * Dado un array de números enteros y un target, retorna los índices de dos
+ * números para los que la suma de ambos sea igual al target.
+ *
+ * Puedes asumir que hay solamente una solución.
+ *
+ * Ejemplo 1:
+ *  Input: nums = [9,2,5,6], target = 7
+ *  Output: [1,2]
+ *  Explicación: nums[1] + nums[2] == 7, devolvemos [1, 2].
+ *
+ * Ejemplo 2:
+ *  Input: nums = [9,2,5,6], target = 100
+ *  Output: null
+ */
