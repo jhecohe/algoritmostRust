@@ -1,8 +1,20 @@
 pub fn zero_matrix(mut matrix: [[u16; 5]; 4]) {
-    for (_i, row) in matrix.iter_mut().enumerate() {
-        for (_y, col) in row.iter_mut().enumerate() {
-            println!("{}", col);
+
+    let mut aux_matrix = [[0u16; 5]; 4];
+    for (_i, row) in matrix.iter().enumerate() {
+        for (_y, col) in row.iter().enumerate() {
+            if *col == 0 as u16 {
+                aux_matrix[_i][_y] = 1
+            }
         }
+    }
+    println!("{:?}", aux_matrix);
+
+    for (_i, row) in aux_matrix.iter_mut().enumerate() {
+        for (_y, col) in row.iter_mut().enumerate() {
+            print!("{} ", col);
+        }
+        println!();
     }
 }
 
